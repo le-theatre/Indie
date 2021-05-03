@@ -9,6 +9,8 @@
 
 namespace ecs {
 
-class World {};
+class World {
+
+};
 
 }

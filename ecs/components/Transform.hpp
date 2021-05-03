@@ -9,7 +9,7 @@
 
 #include "common/Vec3.hpp"
 
-namespace ecs {
+namespace ecs::components {
 
 struct Transform {
     Vec3f position;

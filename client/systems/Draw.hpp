@@ -9,6 +9,4 @@
 
 namespace client::systems {
 
-
-
 }

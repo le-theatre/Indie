@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** indie
 ** File description:
-** Ecs
+** ECS
 */
 
 #pragma once
@@ -13,17 +13,16 @@
 
 namespace ecs {
 
-class Ecs {
+class ECS {
 public:
-    Ecs();
-    ~Ecs();
+    ECS();
+    ~ECS();
     void run();
-    Ecs &registerSystem();
-
-    World world;
+    void registerSystem();
 
 private:
-    std::vector<ISystem> _systems;
+    World $world;
+    std::vector<ISystem> $systems;
 };
 
 }

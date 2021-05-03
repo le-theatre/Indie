@@ -6,11 +6,11 @@
 */
 
 #include "systems/Draw.hpp"
-#include "ecs/Ecs.hpp"
+#include "ecs/ECS.hpp"
 
 int main(void)
 {
-    Ecs ecs;
+    ecs::ECS ecs;
 
     ecs.registerSystem(Draw());
     ecs.registerSystem(Move());

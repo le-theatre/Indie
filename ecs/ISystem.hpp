@@ -10,13 +10,9 @@
 namespace ecs {
 
 class ISystem {
-    public:
-        virtual ~ISystem() = default;
-
-        virtual void run() = 0;
-
-    protected:
-    private:
+public:
+    virtual ~ISystem() = default;
+    virtual void run() = 0;
 };
 
 }
