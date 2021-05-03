@@ -5,22 +5,16 @@
 ** main
 */
 
-#include "Draw.hpp"
-#include "Ecs.hpp"
-
-// Move => Transform, Vitesse, Direction
-
-
+#include "systems/Draw.hpp"
+#include "ecs/Ecs.hpp"
 
 int main(void)
 {
     Ecs ecs;
 
-    ecs
-        .registerSystem(Draw())
-        .registerSystem(Move())
-        .registerSystem(Collisions())
-        .assetsDirectory("assets/")
-        ;
+    ecs.registerSystem(Draw());
+    ecs.registerSystem(Move());
+    ecs.registerSystem(Collisions());
+    ecs.assetsDirectory("assets/");
     ecs.run();
 }

@@ -8,21 +8,22 @@
 #pragma once
 
 #include <vector>
-
 #include "ISystem.hpp"
 #include "World.hpp"
 
+namespace ecs {
+
 class Ecs {
-    public:
-        Ecs();
-        ~Ecs();
+public:
+    Ecs();
+    ~Ecs();
+    void run();
+    Ecs &registerSystem();
 
-        void run();
-        Ecs &registerSystem();
+    World world;
 
-        ecs::World world;
-
-    protected:
-    private:
-        std::vector<ISystem> _systems;
+private:
+    std::vector<ISystem> _systems;
 };
+
+}

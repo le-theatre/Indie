@@ -1,6 +1,13 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Transform
+*/
+
 #pragma once
 
-#include "Vec3.hpp"
+#include "common/Vec3.hpp"
 
 namespace ecs {
 

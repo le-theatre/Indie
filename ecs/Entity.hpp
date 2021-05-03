@@ -1,6 +1,13 @@
-#pragma once
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Entity
+*/
 
 #include <vector>
+
+#pragma once
 
 namespace ecs {
 

@@ -1,4 +1,13 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** ISystem
+*/
+
 #pragma once
+
+namespace ecs {
 
 class ISystem {
     public:
@@ -9,3 +18,5 @@ class ISystem {
     protected:
     private:
 };
+
+}

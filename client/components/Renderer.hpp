@@ -1,5 +1,13 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Renderer
+*/
+
 #pragma once
-namespace ecs {
+
+namespace client::components {
 
 struct Renderer {
 
