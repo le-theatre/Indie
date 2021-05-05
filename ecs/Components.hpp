@@ -29,7 +29,19 @@ struct Velocity {
 
 struct Collider {};
 
-struct Renderer {};
+#include <SFML/Graphics/RectangleShape.hpp>
+
+struct Renderer {
+    sf::RectangleShape shape;
+
+    Renderer(
+        const sf::Color &color = sf::Color::White
+    ) {
+        shape.setFillColor(color);
+        shape.setSize(sf::Vector2f(10, 10));
+        shape.setOrigin(shape.getSize() / 2.f);
+    }
+};
 
 struct Audio {};
 

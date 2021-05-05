@@ -4,15 +4,17 @@
 #include <tuple>
 
 #include "System.hpp"
+#include "Ecs.hpp"
+#include "IScene.hpp"
 
 template<typename ... SystemList>
-class Scene {
+class Scene : public IScene {
 private:
     std::tuple<SystemList...> $systems;
 
 protected:
-    EntityManager<Components> &$manager;
-    Scene(EntityManager<Components> &manager) : $manager(manager) {}
+    Ecs<Components> &$ecs;
+    Scene(Ecs<Components> &ecs) : $ecs(ecs) {}
 
 public:
     virtual void onStart() {}
@@ -21,27 +23,23 @@ public:
     virtual void onResume() {}
     virtual void handleEvent() {}
     virtual void fixedUpdate() {}
-    virtual void update(float deltaTime) {}
-    virtual void shadowUpdate(float deltaTime) {}
+    virtual void update(float) {}
+    virtual void shadowUpdate(float) {}
     virtual void shadowFixedUpdate() {}
 
     template<typename TSystem>
     void runSystem(TSystem &system)
     {
-        for (auto &entity : $manager.$entities) {
-            std::cout << "entity(" << entity.entityId << ")" << std::endl;
+        for (auto &entity : $ecs.entityManager.$entities) {
             if (entity.isAlive and system.match(entity.bitset)) {
-                system.updateEntity(entity.entityId, $manager);
+                system.updateEntity(entity.entityId, $ecs);
             }
         }
     }
 
-    void updateSystems()
+    void updateSystems() final
     {
         std::apply([this](auto &&...args){((runSystem(args)), ...);}, $systems);
     }
 };
 
-class SceneManager {
-
-};
