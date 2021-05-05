@@ -1,3 +1,8 @@
+# Customs
+.idea
+.vscode
+build
+
 # Prerequisites
 *.d
 

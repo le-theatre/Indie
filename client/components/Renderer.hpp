@@ -2,11 +2,15 @@
 ** EPITECH PROJECT, 2021
 ** indie
 ** File description:
-** Draw
+** Renderer
 */
 
 #pragma once
 
-namespace client::systems {
+namespace client::components {
+
+struct Renderer {
+
+};
 
 }
