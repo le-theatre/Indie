@@ -14,24 +14,24 @@ struct SameType<T, T>
     static const bool value = true;
 };
 
-template<typename ...ComponentList>
+template<typename ComponentList>
 struct Entity {
     using ID = std::size_t;
     ID entityId;
 
-    std::bitset<TypeList<ComponentList...>::size> bitset;
+    std::bitset<ComponentList::size> bitset;
     bool isAlive{true};
 };
 
-template<typename ...ComponentList>
+template<typename ComponentList>
 class EntityBuilder;
 
-template<typename ...ComponentList>
+template<typename ComponentList>
 class EntityManager {
-private:
-    using vtype = std::tuple<std::vector<ComponentList>...>;
-    vtype $components;
-    std::vector<Entity<ComponentList...>> $entities;
+public:
+    using VType = typename ComponentList::TupleVector;
+    VType $components;
+    std::vector<Entity<ComponentList>> $entities;
 
 public:
     EntityManager()
@@ -39,9 +39,9 @@ public:
         std::apply([](auto&&... args) {((args.resize(1000)), ...);}, $components);
     }
 
-    EntityBuilder<ComponentList...> createEntity()
+    EntityBuilder<ComponentList> createEntity()
     {
-        return EntityBuilder<ComponentList...>(*this);
+        return EntityBuilder<ComponentList>(*this);
     }
 
     // std::tuple<std::vector<ComponentList>...> getComponents() const
@@ -51,7 +51,7 @@ public:
 
     template<int N, typename T>
     struct VectorOfType: SameType<T,
-       typename std::tuple_element<N, vtype>::type::value_type>
+       typename std::tuple_element<N, VType>::type::value_type>
     { };
 
     template <int N, class T, class Tuple,
@@ -76,42 +76,47 @@ public:
     };
 
     template <typename T>
-    std::vector<T>& getComponent()
+    std::vector<T> &getComponent()
     {
-        return MatchingField<0, T, vtype,
-               VectorOfType<0, T>::value>::get($components);
+        return MatchingField<0, T, VType, VectorOfType<0, T>::value>::get($components);
+    }
+
+    template<typename T>
+    T &getEntityComponent(std::size_t entityid)
+    {
+        return getComponent<T>()[entityid];
     }
 
     // template <typename Component>
     // std::vector<Component> getComponent()
     // {
-    //     return std::get<IndexOf<Component, ComponentList...>::value>($components);
+    //     return std::get<IndexOf<Component, ComponentList>::value>($components);
     // }
 
-    std::vector<Entity<ComponentList...>> &getEntities()
+    std::vector<Entity<ComponentList>> &getEntities()
     {
         return $entities;
     }
 };
 
-template<typename ...ComponentList>
+template<typename ComponentList>
 class EntityBuilder {
 private:
-    Entity<ComponentList...> $entity;
-    EntityManager<ComponentList...> &$manager;
+    Entity<ComponentList> $entity;
+    EntityManager<ComponentList> &$manager;
 
 public:
-    EntityBuilder(EntityManager<ComponentList...> &manager) : $manager(manager)
+    EntityBuilder(EntityManager<ComponentList> &manager) : $manager(manager)
     {
         $entity.entityId = $manager.getEntities().size();
     }
 
     template<typename Component, typename ...Ts>
-    EntityBuilder<ComponentList...> &addComponent(Ts&&... args)
+    EntityBuilder<ComponentList> &addComponent(Ts&&... args)
     {
         auto t = Component(std::forward<Ts>(args)...);
 
-        $entity.bitset[IndexOf<Component, TypeList<ComponentList...>>::value] = true;
+        $entity.bitset[IndexOf<Component, ComponentList>::value] = true;
         $manager.template getComponent<Component>()[$entity.entityId] = t;
         return *this;
     }
@@ -121,7 +126,7 @@ public:
         $manager.getEntities().push_back($entity);
     }
 
-    Entity<ComponentList...> &getEntity()
+    Entity<ComponentList> &getEntity()
     {
         return $entity;
     }

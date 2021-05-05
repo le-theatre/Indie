@@ -1,11 +1,15 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
+#include <tuple>
 #include <type_traits>
 
 template<typename ...Ts>
 struct TypeList
 {
+    using TupleVector = std::tuple<std::vector<Ts>...>;
+    using Tuple = std::tuple<Ts...>;
     static constexpr std::size_t size{sizeof...(Ts)};
 };
 
