@@ -1,16 +1,22 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** main
+*/
+
+#include <iostream>
 #include "Signature.hpp"
 #include "EntityManager.hpp"
-#include <iostream>
-
 #include "Components.hpp"
 #include "System.hpp"
 #include "Scene.hpp"
-#include "Ecs.hpp"
+#include "ECS.hpp"
 
 class MovementSystem : public ISystem<Transform, Velocity> {
 public:
     void run(
-        Ecs<Components> &ecs,
+        ECS<Components> &ecs,
         Transform &transform,
         Velocity &velocity
     ) override {
@@ -21,7 +27,7 @@ public:
 class RenderSystem : public ISystem<Transform, Renderer> {
 public:
     void run(
-        Ecs<Components> &ecs,
+        ECS<Components> &ecs,
         Transform &transform,
         Renderer &renderer
     ) override {
@@ -33,7 +39,7 @@ public:
 #include <SFML/Window/Event.hpp>
 class GameScene : public Scene<MovementSystem, RenderSystem> {
 public:
-    GameScene(Ecs<Components> &ecs) : Scene(ecs) {}
+    GameScene(ECS<Components> &ecs) : Scene(ecs) {}
 
     void update(float deltatime) {
         $ecs.window.display();
@@ -51,7 +57,7 @@ public:
 
 int main(void)
 {
-    Ecs<Components> ecs;
+    ECS<Components> ecs;
     std::bitset<Components::size> b;
     for (auto i = 0; i < 100; ++i) {
         auto builder = ecs.entityManager

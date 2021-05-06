@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** TypeList
+*/
+
 #pragma once
 
 #include <cstdint>
@@ -45,4 +52,3 @@ struct IndexOf<T, TypeList<TOther, Ts...>>
 // std::cout << IndexOf<T2, Types>::value << std::endl;
 //
 ///////////////////////////////////////////////////////////////////////////////
-

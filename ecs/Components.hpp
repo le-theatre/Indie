@@ -1,6 +1,13 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Components
+*/
+
 #pragma once
 
-// TODO Use our own vectors
+/// TODO: Use our own vectors
 #include <SFML/System/Vector3.hpp>
 
 #include "TypeList.hpp"

@@ -1,10 +1,16 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Scene
+*/
+
 #pragma once
 
 #include <memory>
 #include <tuple>
-
 #include "System.hpp"
-#include "Ecs.hpp"
+#include "ECS.hpp"
 #include "IScene.hpp"
 
 template<typename ... SystemList>
@@ -13,8 +19,8 @@ private:
     std::tuple<SystemList...> $systems;
 
 protected:
-    Ecs<Components> &$ecs;
-    Scene(Ecs<Components> &ecs) : $ecs(ecs) {}
+    ECS<Components> &$ecs;
+    Scene(ECS<Components> &ecs) : $ecs(ecs) {}
 
 public:
     virtual void onStart() {}

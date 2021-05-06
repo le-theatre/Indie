@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** IScene
+*/
+
 #pragma once
 
 class IScene {

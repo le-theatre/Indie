@@ -1,30 +1,35 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** ECS
+*/
+
 #pragma once
 
 #include <stack>
 #include <memory>
-
 #include "EntityManager.hpp"
 #include "IScene.hpp"
-
-// To refacto
+/// TODO: Change render system
 #include <SFML/Graphics/RenderWindow.hpp>
 
 template<typename ComponentList>
-class Ecs {
+class ECS {
 public:
     EntityManager<ComponentList> entityManager;
     std::stack<std::unique_ptr<IScene>> scenes;
 
-    // To refacto
-    sf::RenderWindow window{sf::VideoMode(1920, 1080), "Ecs"};
+    /// TODO: Change render system
+    sf::RenderWindow window{sf::VideoMode(1920, 1080), "ECS"};
 
     void run()
     {
-        std::cout << "Starting Ecs..." << std::endl;
+        std::cout << "Starting ECS..." << std::endl;
         while (scenes.size()) {
             tick();
         }
-        std::cout << "Ending Ecs..." << std::endl;
+        std::cout << "Ending ECS..." << std::endl;
     }
 
 private:
