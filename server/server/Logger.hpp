@@ -21,26 +21,19 @@ enum class LogLevel {
 
 class Logger {
 public:
-    static Logger &getInstance();
-
-    void setLogLevel(LogLevel level);
-
-    void debug(const std::string &message);
-
-    void info(const std::string &message);
-
-    void warning(const std::string &message);
-
-    void error(const std::string &message);
+    static Logger &GetInstance();
+    void SetLogLevel(LogLevel level);
+    void Debug(const std::string &message);
+    void Info(const std::string &message);
+    void Warning(const std::string &message);
+    void Error(const std::string &message);
 
 private:
-    Logger() {}
-
-    LogLevel m_level{LogLevel::Debug};
+    Logger() {};
+    LogLevel level_{LogLevel::Debug};
 
 public:
     Logger(Logger const&) = delete;
-
     void operator=(Logger const&) = delete;
 };
 

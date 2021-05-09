@@ -5,12 +5,12 @@
 ** main
 */
 
-#include "IndieStudioServer.hpp"
+#include "IndieServer.hpp"
 
 int main(int argc, char const *argv[])
 {
     try {
-        return IndieStudioServer(argc, argv).start();
+        return indieserv::IndieServer(argc, argv).Run();
     } catch (...) {
         return 84;
     }

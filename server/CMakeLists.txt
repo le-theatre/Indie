@@ -4,20 +4,23 @@
 cmake_minimum_required(VERSION 3.16)
 project(indie)
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-I../deps)
+include_directories(../deps)
 
 ###############################################################################
 # Indie Server Source                                                         #
 ###############################################################################
 add_library(lib_indie_server STATIC
-    Server.cpp
-    Server.hpp
-    Settings.hpp
-    Logger.cpp
-    Logger.hpp
-    IndieStudioServer.hpp
-    IndieStudioServer.cpp
-    Config.hpp)
+    IndieServer.hpp
+    IndieServer.cpp
+    ArgumentsParser.cpp
+    ArgumentsParser.hpp
+
+    server/Config.hpp
+    server/Engine.cpp
+    server/Engine.hpp
+    server/Logger.cpp
+    server/Logger.cpp
+)
 
 ###############################################################################
 # Executable                                                                  #

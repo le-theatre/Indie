@@ -12,8 +12,9 @@
 namespace server {
 
 struct Config {
+    using Port = uint16_t;
     std::string address;
-    short port;
+    Port port;
     bool debug;
 };
 

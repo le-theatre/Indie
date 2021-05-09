@@ -11,20 +11,20 @@
 
 namespace server {
 
-Logger &Logger::getInstance()
+Logger &Logger::GetInstance()
 {
     static Logger instance;
     return instance;
 }
 
-void Logger::setLogLevel(LogLevel level)
+void Logger::SetLogLevel(LogLevel level)
 {
-    m_level = level;
+    level_ = level;
 }
 
-void Logger::debug(const std::string &message)
+void Logger::Debug(const std::string &message)
 {
-    if ((int)m_level > (int)LogLevel::Debug) {
+    if ((int)level_ > (int)LogLevel::Debug) {
         return;
     }
     std::stringstream stream;
@@ -34,9 +34,9 @@ void Logger::debug(const std::string &message)
     std::cerr << stream.str();
 }
 
-void Logger::info(const std::string &message)
+void Logger::Info(const std::string &message)
 {
-    if ((int)m_level > (int)LogLevel::Info) {
+    if ((int)level_ > (int)LogLevel::Info) {
         return;
     }
     std::stringstream stream;
@@ -46,9 +46,9 @@ void Logger::info(const std::string &message)
     std::cerr << stream.str();
 }
 
-void Logger::warning(const std::string &message)
+void Logger::Warning(const std::string &message)
 {
-    if ((int)m_level > (int)LogLevel::Warn) {
+    if ((int)level_ > (int)LogLevel::Warn) {
         return;
     }
     std::stringstream stream;
@@ -58,9 +58,9 @@ void Logger::warning(const std::string &message)
     std::cerr << stream.str();
 }
 
-void Logger::error(const std::string &message)
+void Logger::Error(const std::string &message)
 {
-    if ((int)m_level > (int)LogLevel::Error) {
+    if ((int)level_ > (int)LogLevel::Error) {
         return;
     }
     std::stringstream stream;
