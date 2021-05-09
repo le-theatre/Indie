@@ -2,11 +2,11 @@
 # Misc                                                                        #
 ###############################################################################
 cmake_minimum_required(VERSION 3.16)
-project(indie)
+project(clilib)
 set(CMAKE_CXX_STANDARD 17)
 
 ###############################################################################
-# Indie ECS Source                                                            #
+# CliLib Source                                                               #
 ###############################################################################
 add_library(lib_clilib STATIC
     Parser.hpp

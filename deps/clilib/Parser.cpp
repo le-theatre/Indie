@@ -6,12 +6,12 @@
 */
 
 #include <iostream>
-#include "clilib/Parser.hpp"
+#include "Parser.hpp"
 
 namespace clilib {
 
 Parser::Parser(int argc, char const **argv) :
-    m_argc(argc),
+    m_argc(std::size_t(argc)),
     m_argv(argv),
     m_flags(),
     m_options(),

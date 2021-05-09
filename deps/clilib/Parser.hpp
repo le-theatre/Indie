@@ -71,7 +71,7 @@ private:
     bool searchMatchingFlag(const std::string &value);
     bool checkRequired();
 
-    int m_argc;
+    std::size_t m_argc;
     char const **m_argv;
     std::vector<FlagData> m_flags;
     std::vector<OptionData> m_options;
