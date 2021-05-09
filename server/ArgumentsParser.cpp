@@ -5,10 +5,10 @@
 ** ArgumentsParser
 */
 
-#include "clilib/Parser.hpp"
+#include "lib/cli/Parser.hpp"
 #include "ArgumentsParser.hpp"
 
-namespace indieserv {
+namespace indie {
 
 ArgumentsParser::ArgumentsParser(int argc, char const **argv) :
     commandLine_(argc, argv),

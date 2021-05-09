@@ -18,8 +18,6 @@ add_library(lib_indie_server STATIC
     server/Config.hpp
     server/Engine.cpp
     server/Engine.hpp
-    server/Logger.cpp
-    server/Logger.cpp
 )
 
 ###############################################################################
@@ -27,4 +25,5 @@ add_library(lib_indie_server STATIC
 ###############################################################################
 add_executable(indie_server main.cpp)
 target_link_libraries(indie_server PUBLIC lib_indie_server)
-target_link_libraries(indie_server PUBLIC lib_clilib)
+target_link_libraries(indie_server PUBLIC lib_cli)
+target_link_libraries(indie_server PUBLIC lib_log)

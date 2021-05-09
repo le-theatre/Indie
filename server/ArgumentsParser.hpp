@@ -7,9 +7,10 @@
 
 #pragma once
 
+#include "lib/cli/Parser.hpp"
 #include "server/Config.hpp"
 
-namespace indieserv {
+namespace indie {
 
 class ArgumentsParser {
 public:
@@ -21,7 +22,7 @@ private:
     void AddAddressHandler();
     void AddPortHandler();
 
-    clilib::Parser commandLine_;
+    lib::cli::Parser commandLine_;
     server::Config config_;
 };
 

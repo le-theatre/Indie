@@ -10,7 +10,7 @@
 int main(int argc, char const *argv[])
 {
     try {
-        return indieserv::IndieServer(argc, argv).Run();
+        return indie::IndieServer(argc, argv).Run();
     } catch (...) {
         return 84;
     }

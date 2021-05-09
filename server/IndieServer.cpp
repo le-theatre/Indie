@@ -6,11 +6,10 @@
 */
 
 #include <iostream>
-#include "clilib/Parser.hpp"
 #include "IndieServer.hpp"
 #include "ArgumentsParser.hpp"
 
-namespace indieserv {
+namespace indie {
 
 IndieServer::IndieServer(int argc, char const **argv) :
     argc_(argc),
@@ -26,6 +25,7 @@ int IndieServer::Run()
         DisplayUsage();
         return 84;
     }
+    DisplayDecorator();
     InitServer();
     return server_.Run();
 }
@@ -53,6 +53,24 @@ void IndieServer::InitServer()
 void IndieServer::DisplayUsage()
 {
     std::cerr << IndieServerUsage;
+}
+
+void IndieServer::DisplayDecorator()
+{
+    std::cerr
+        << "[IndieServer] Listenning on "
+        << config_.address
+        << ":"
+        << config_.port
+        << std::endl;
+    if (config_.debug) {
+        std::cerr
+            << "[IndieServer] Running DebugMode"
+            << std::endl;
+    }
+    std::cerr
+        << "--- LOGS ---"
+        << std::endl;
 }
 
 }

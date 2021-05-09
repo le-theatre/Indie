@@ -11,7 +11,7 @@
 #include "server/Config.hpp"
 #include "server/Engine.hpp"
 
-namespace indieserv {
+namespace indie {
 
 static const std::string IndieServerUsage = \
     "usage: ./server [-a address|--address address]\n"
@@ -29,6 +29,7 @@ private:
     void InitServer();
     void RegisterOptionHandlers();
     void DisplayUsage();
+    void DisplayDecorator();
 
     int argc_;
     char const **argv_;
