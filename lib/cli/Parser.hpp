@@ -12,7 +12,7 @@
 #include <tuple>
 #include <vector>
 
-namespace clilib {
+namespace lib::cli {
 
 class Parser {
 public:

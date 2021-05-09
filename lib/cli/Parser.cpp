@@ -8,7 +8,7 @@
 #include <iostream>
 #include "Parser.hpp"
 
-namespace clilib {
+namespace lib::cli {
 
 Parser::Parser(int argc, char const **argv) :
     m_argc(std::size_t(argc)),

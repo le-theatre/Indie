@@ -2,13 +2,13 @@
 # Misc                                                                        #
 ###############################################################################
 cmake_minimum_required(VERSION 3.16)
-project(clilib)
+project(loglib)
 set(CMAKE_CXX_STANDARD 17)
 
 ###############################################################################
-# CliLib Source                                                               #
+# Log Source                                                                  #
 ###############################################################################
-add_library(lib_clilib STATIC
-    Parser.hpp
-    Parser.cpp
+add_library(lib_log STATIC
+    Logger.hpp
+    Logger.cpp
 )

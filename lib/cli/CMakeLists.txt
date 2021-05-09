@@ -2,16 +2,13 @@
 # Misc                                                                        #
 ###############################################################################
 cmake_minimum_required(VERSION 3.16)
-project(indie)
+project(clilib)
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra)
-include_directories(.)
 
 ###############################################################################
-# Subdirectories                                                              #
+# CLI    Source                                                               #
 ###############################################################################
-# add_subdirectory(ecs)
-# add_subdirectory(client)
-add_subdirectory(lib/cli)
-add_subdirectory(lib/log)
-add_subdirectory(server)
+add_library(lib_cli STATIC
+    Parser.hpp
+    Parser.cpp
+)
