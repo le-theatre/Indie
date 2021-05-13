@@ -2,6 +2,8 @@
 
 #include "Signature.hpp"
 
+namespace Ecs {
+
 template <class T1, class T2>
 struct SameType
 {
@@ -29,14 +31,15 @@ class EntityBuilder;
 template<typename ComponentList>
 class EntityManager {
 public:
-    using VType = typename ComponentList::TupleVector;
-    VType $components;
+    using VType = typename ComponentList::Tuple;
+
+    std::vector<VType> $components;
     std::vector<Entity<ComponentList>> $entities;
 
 public:
     EntityManager()
     {
-        std::apply([](auto&&... args) {((args.resize(1000)), ...);}, $components);
+        $components.resize(16000);
     }
 
     EntityBuilder<ComponentList> createEntity()
@@ -44,25 +47,23 @@ public:
         return EntityBuilder<ComponentList>(*this);
     }
 
-    // std::tuple<std::vector<ComponentList>...> getComponents() const
-    // {
-    //     return $components;
-    // }
+    void pushEntity(Entity<ComponentList> entity, const VType &entityComponents)
+    {
+        entity.entityId = $entities.size();
+        $components[entity.entityId] = entityComponents;
+        $entities.push_back(entity);
+    }
 
     template<int N, typename T>
-    struct VectorOfType: SameType<T,
-       typename std::tuple_element<N, VType>::type::value_type>
+    struct VectorOfType: SameType<T, typename std::tuple_element<N, VType>::type::value_type>
     { };
 
-    template <int N, class T, class Tuple,
-             bool Match = false> // this =false is only for clarity
+    template <int N, class T, class Tuple, bool Match = false>
     struct MatchingField
     {
         static std::vector<T>& get(Tuple& tp)
         {
-            // The "non-matching" version
-            return MatchingField<N+1, T, Tuple,
-                   VectorOfType<N+1, T>::value>::get(tp);
+            return MatchingField<N+1, T, Tuple, VectorOfType<N+1, T>::value>::get(tp);
         }
     };
 
@@ -75,23 +76,11 @@ public:
         }
     };
 
-    template <typename T>
-    std::vector<T> &getComponent()
-    {
-        return MatchingField<0, T, VType, VectorOfType<0, T>::value>::get($components);
-    }
-
     template<typename T>
     T &getEntityComponent(std::size_t entityid)
     {
-        return getComponent<T>()[entityid];
+        return std::get<IndexOf<T, ComponentList>::value>($components[entityid]);
     }
-
-    // template <typename Component>
-    // std::vector<Component> getComponent()
-    // {
-    //     return std::get<IndexOf<Component, ComponentList>::value>($components);
-    // }
 
     std::vector<Entity<ComponentList>> &getEntities()
     {
@@ -102,14 +91,14 @@ public:
 template<typename ComponentList>
 class EntityBuilder {
 private:
+    using VType = typename ComponentList::Tuple;
+
     Entity<ComponentList> $entity;
     EntityManager<ComponentList> &$manager;
+    VType $entityComponents;
 
 public:
-    EntityBuilder(EntityManager<ComponentList> &manager) : $manager(manager)
-    {
-        $entity.entityId = $manager.getEntities().size();
-    }
+    EntityBuilder(EntityManager<ComponentList> &manager) : $manager(manager) {}
 
     template<typename Component, typename ...Ts>
     EntityBuilder<ComponentList> &addComponent(Ts&&... args)
@@ -117,13 +106,13 @@ public:
         auto t = Component(std::forward<Ts>(args)...);
 
         $entity.bitset[IndexOf<Component, ComponentList>::value] = true;
-        $manager.template getComponent<Component>()[$entity.entityId] = t;
+        std::get<IndexOf<Component, ComponentList>::value>($entityComponents) = t;
         return *this;
     }
 
     void build()
     {
-        $manager.getEntities().push_back($entity);
+        $manager.pushEntity($entity, $entityComponents);
     }
 
     Entity<ComponentList> &getEntity()
@@ -131,3 +120,5 @@ public:
         return $entity;
     }
 };
+
+}

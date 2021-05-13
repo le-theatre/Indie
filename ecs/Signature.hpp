@@ -4,9 +4,9 @@
 #include <type_traits>
 #include <utility>
 
-#include "TypeList.hpp"
+#include "common/TypeList.hpp"
 
-// tmp
+namespace Ecs {
 
 template<typename typeList, typename SignatureComponents>
 struct Signature {
@@ -30,3 +30,5 @@ public:
         callSetBit(SignatureComponents{});
     }
 };
+
+}

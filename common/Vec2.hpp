@@ -8,7 +8,7 @@
 #pragma once
 
 template <typename TValue>
-class Vec2
+struct Vec2
 {
     Vec2(TValue x = 0, TValue y = 0) : x(x), y(y)
     {

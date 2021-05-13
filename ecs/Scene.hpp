@@ -1,29 +1,30 @@
 #pragma once
 
-#include <memory>
 #include <tuple>
 
-#include "System.hpp"
-#include "Ecs.hpp"
+#include "World.hpp"
 #include "IScene.hpp"
 
-template<typename ... SystemList>
+namespace Ecs {
+
+template<typename ComponentList, typename ... SystemList>
 class Scene : public IScene {
 private:
     std::tuple<SystemList...> $systems;
 
 protected:
-    Ecs<Components> &$ecs;
-    Scene(Ecs<Components> &ecs) : $ecs(ecs) {}
+    World<ComponentList> &$ecs;
 
 public:
+    Scene(World<ComponentList> &ecs) : $ecs(ecs) {}
+
     virtual void onStart() {}
     virtual void onStop() {}
     virtual void onPause() {}
     virtual void onResume() {}
     virtual void handleEvent() {}
     virtual void fixedUpdate() {}
-    virtual void update(float) {}
+    virtual void update(float) { updateSystems(); }
     virtual void shadowUpdate(float) {}
     virtual void shadowFixedUpdate() {}
 
@@ -43,3 +44,4 @@ public:
     }
 };
 
+}

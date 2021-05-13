@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Ecs {
+
 class IScene {
 public:
     virtual void onStart() = 0;
@@ -13,3 +15,5 @@ public:
     virtual void shadowFixedUpdate() = 0;
     virtual void updateSystems() = 0;
 };
+
+}
