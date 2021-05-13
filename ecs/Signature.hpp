@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Signature
+*/
+
 #pragma once
 
 #include <bitset>

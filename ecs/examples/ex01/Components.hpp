@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2021
+** indie
+** File description:
+** Components
+*/
+
 #pragma once
 
 #include "common/Vec3.hpp"
