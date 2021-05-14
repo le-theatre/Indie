@@ -20,6 +20,12 @@ private:
 public:
     SceneManager(World<ComponentList> &ecs) : $ecs(ecs) {}
 
+    void clear()
+    {
+        $currentScene = nullptr;
+        $sceneStack.clear();
+    }
+
     template <typename TScene>
     void push()
     {

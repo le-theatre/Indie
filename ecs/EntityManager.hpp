@@ -61,6 +61,11 @@ public:
         $entities.push_back(entity);
     }
 
+    void clear()
+    {
+        $entities.clear();
+    }
+
     template<int N, typename T>
     struct VectorOfType: SameType<T, typename std::tuple_element<N, VType>::type::value_type>
     { };

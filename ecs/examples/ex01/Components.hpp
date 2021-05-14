@@ -19,7 +19,7 @@ struct Transform {
     Transform(
         const Vec3f &_position = Vec3f(0, 0, 0),
         const Vec3f &_rotation = Vec3f(0, 0, 0),
-        const Vec3f &_scale = Vec3f(0, 0, 0)
+        const Vec3f &_scale = Vec3f(1, 1, 1)
     ) : position(_position), rotation(_rotation), scale(_scale) {}
 };
 

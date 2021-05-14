@@ -15,7 +15,6 @@
 template<typename ...Ts>
 struct TypeList
 {
-    using TupleVector = std::tuple<std::vector<Ts>...>;
     using Tuple = std::tuple<Ts...>;
     static constexpr std::size_t size{sizeof...(Ts)};
 };

@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <ctime>
-// #include <boost/any.hpp>
+#include <boost/any.hpp>
 
 namespace Ecs {
 
@@ -50,6 +50,11 @@ public:
             sceneManager.update(deltaTime);
         }
         std::cout << "Ending World..." << std::endl;
+    }
+
+    void stop()
+    {
+        sceneManager.clear();
     }
 
 };

@@ -20,7 +20,6 @@ public:
     virtual void update(float deltaTime) = 0;
     virtual void shadowUpdate(float deltaTime) = 0;
     virtual void shadowFixedUpdate() = 0;
-    virtual void updateSystems() = 0;
 };
 
 }

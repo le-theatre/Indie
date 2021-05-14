@@ -25,25 +25,54 @@ public:
         Transform &transform,
         Renderer &renderer
     ) final {
+        renderer.shape.setScale(sf::Vector2f(transform.scale.x, transform.scale.y));
         renderer.shape.setPosition(sf::Vector2f(transform.position.x, transform.position.y));
         world.window.draw(renderer.shape);
     }
 };
 
+class AreYouSureScene : public Ecs::Scene<Components, TypeList<RenderSystem>>
+{
+public:
+    AreYouSureScene(Ecs::World<Components> &ecs) : Scene(ecs) {}
+
+    void onStart()
+    {
+        ecs.entityManager.createEntity()
+            .addComponent<Transform>(Vec3f(1920 / 2, 1080 / 2), Vec3f(), Vec3f(100, 25))
+            .addComponent<Renderer>()
+            .build();
+    }
+
+    void update(float deltatime) {
+        Scene::update(deltatime);
+
+        ecs.window.display();
+        ecs.window.clear();
+        sf::Event event;
+        while (ecs.window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                ecs.stop();
+            }
+        }
+    }
+};
+
 #include <SFML/Window/Event.hpp>
-class GameScene : public Ecs::Scene<Components, MovementSystem, RenderSystem> {
+class GameScene : public Ecs::Scene<Components, TypeList<MovementSystem, RenderSystem>>
+{
 public:
     GameScene(Ecs::World<Components> &ecs) : Scene(ecs) {}
 
     void update(float deltatime) {
         Scene::update(deltatime);
 
-        $ecs.window.display();
-        $ecs.window.clear();
+        ecs.window.display();
+        ecs.window.clear();
         sf::Event event;
-        while ($ecs.window.pollEvent(event)) {
+        while (ecs.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                $ecs.sceneManager.pop();
+                ecs.sceneManager.push<AreYouSureScene>();
             }
         }
     }
